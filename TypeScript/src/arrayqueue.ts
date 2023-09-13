@@ -94,10 +94,13 @@ function newArrayIntQueue (): IntQueue {
     },
 
     isEmpty: function (): boolean {
-      return size >= 0
+      return size == 0
     },
 
     peek: function (): number | null {
+      if (this.isEmpty()) {
+        return null
+      }
       return elementData[head]
     },
 

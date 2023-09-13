@@ -1,9 +1,10 @@
 import { newArrayIntQueue } from "../src/arrayqueue";
 import { newLinkedListIntQueue } from "../src/linkedlistqueue.js";
+import {create} from "domain";
 
 // pick one queue implementation, can run test easily for both, due to subtype polymorphism
 let createQueue = newLinkedListIntQueue
-// let createQueue = newArrayIntQueue
+ //let createQueue = newArrayIntQueue
 
 // TODOs:
 // write more test cases to test dequeue and clear functions.
@@ -52,4 +53,29 @@ describe("test size: ", ()=> {
             queue.enqueue(i)
         expect(queue.size()).toBe(11)
     })
+})
+
+//New tests
+test("test clear: clear method empty queue", () => {
+    const queue = createQueue()
+    queue.enqueue(1)
+    queue.clear()
+    expect(queue.isEmpty()).toBeTruthy()
+    expect(queue.dequeue()).toBeNull()
+    expect(queue).toEqual(queue)
+
+})
+
+test("test dequeue", () => {
+    const queue = createQueue()
+    expect(queue.dequeue()).toBeNull()
+})
+
+test("test ensureCapacity", () => {
+    const queue = createQueue()
+    queue.enqueue(1)
+    queue.dequeue()
+    for (let i = 0; i < 20; i++) {
+        queue.enqueue(1)
+    }
 })
